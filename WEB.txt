@@ -1,0 +1,117 @@
+-----------------------1-----------------------
+class Employee {
+    id = 0;
+    firstName = '';
+    lastName = '';
+    age = 0;
+    workingYears = 0;
+    getPosition() {
+        if(this.workingYears < 2) {
+        	return 'junior'
+        }
+        if(this.workingYears < 5) {
+        	return 'middle'
+        }
+        else {
+        	return 'senior'
+        }
+    }
+}
+
+const John = new Employee();
+John.workingYears = 2;
+
+const Bob = new Employee();
+Bob.workingYears = 5;
+
+`John's is ${John.getPosition()} Bob's is ${Bob.getPosition()}`
+
+
+
+
+
+-----------------------2-----------------------
+class Employee {
+    id = 0;
+    firstName = '';
+    lastName = '';
+    age = 0;
+    salary = 0;
+    getNetSalary() {
+        return this.salary*0.8
+    }
+}
+
+const John = new Employee();
+John.salary = 100;
+
+const Bob = new Employee();
+Bob.salary = 200;
+
+`John's net salary is ${John.getNetSalary()} Bob's net salary is ${Bob.getNetSalary()}`
+
+
+
+-----------------------3-----------------------
+class newElement extends HTMLElement {
+  updateText(text) {
+    this.innerText = text;
+  }
+  updateStyles(styles) {
+  	this.style[Object.keys(styles)] = styles[Object.keys(styles)];
+  } 
+}
+
+customElements.define('new-element', newElement);
+const element = new newElement();
+
+document.body.appendChild(element);
+element.innerText = 'Default Text';
+
+
+element.updateText("FUCK");
+element.updateStyles({color:"red"});
+
+
+
+
+-----------------------4-----------------------
+class newElement extends HTMLElement {
+	trigger(eventName, eventDetails) {
+  	return new CustomEvent(eventName, eventDetails);
+  }
+}
+
+customElements.define('new-element', newElement);
+let myNewElement = new newElement();
+const haha = myNewElement.trigger('new-event', {detail: {data: 1}});
+
+myNewElement.addEventListener('new-event', (event) => {
+	console.log(event.detail);
+});
+
+myNewElement.addEventListener('new-event', () => {
+	document.createElement('div');
+});
+
+myNewElement.dispatchEvent(haha);
+
+
+-----------------------5-----------------------
+const pr = new Promise((resolve)=>{
+  setTimeout(()=>{
+  resolve()
+},10000)
+})
+
+pr.then(()=>console.log('after 10 seconds log'))
+
+
+
+const pr = new Promise((r, j) => {
+    setTimeout(r, 5000)
+})
+//console.log(new Date())
+pr.then(() => {
+    console.log(new Date())
+})
